@@ -12,9 +12,14 @@ async def obtener_usuarios():
     cursor.execute("SELECT * FROM usuarios")
     usuarios = cursor.fetchall()
     return usuarios
+@app.get("/usuarios/{name}")
+async def obtener_usuarios(name: str):
+    cursor.execute("SELECT * FROM usuarios WHERE nombre = '"+str(name)+"'")
+    usuarios = cursor.fetchall()
+    return usuarios
 @app.post("/crear-usuario")
-async def crear_usuario(nombre: str):
-    cursor.execute("INSERT INTO usuarios (nombre) VALUES ('"+nombre+"')")
+async def crear_usuario(nombre: str, edad: int, username: str, password: str, direccion: str):
+    cursor.execute("INSERT INTO usuarios (Nombre, Edad, Direccion, username, password) VALUES ('"+nombre+"', '"+str(edad)+"', '"+direccion+"', '"+username+"', '"+password+"' )")
     conexion.commit()
     return {"mensaje": "Usuario creado correctamente"}
 
