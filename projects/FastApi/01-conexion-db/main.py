@@ -1,5 +1,7 @@
 from config.db import cursor, conexion
+from services.usuarios import getUsers, generateTableHTML, getUsersById, createUser, updateUser
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
@@ -7,24 +9,21 @@ app = FastAPI()
 async def root():
     return {"message": "Hello World"}
 
-@app.get("/usuarios")
+@app.get("/usuarios", response_class=HTMLResponse)
 async def obtener_usuarios():
-    cursor.execute("SELECT * FROM usuarios")
-    usuarios = cursor.fetchall()
-    return usuarios
-@app.get("/usuarios/{name}")
-async def obtener_usuarios(name: str):
-    cursor.execute("SELECT * FROM usuarios WHERE nombre = '"+str(name)+"'")
-    usuarios = cursor.fetchall()
-    return usuarios
+    users = getUsers(cursor)
+    return generateTableHTML(users)
+
+
+@app.get("/usuarios/{id}")
+async def obtener_usuarios(id: int):
+    resultadoUsuario = getUsersById(cursor, id)
+    return resultadoUsuario
+
 @app.post("/crear-usuario")
 async def crear_usuario(nombre: str, edad: int, username: str, password: str, direccion: str):
-    cursor.execute("INSERT INTO usuarios (Nombre, Edad, Direccion, username, password) VALUES ('"+nombre+"', '"+str(edad)+"', '"+direccion+"', '"+username+"', '"+password+"' )")
-    conexion.commit()
-    return {"mensaje": "Usuario creado correctamente"}
+    return createUser(cursor, conexion, nombre, edad, username, password, direccion)
 
 @app.put("/actualizar-usuario/{name}")
 async def actualizar_usuario(name: str, newName: str):
-    cursor.execute("UPDATE usuarios SET nombre = '"+newName+"' WHERE nombre = '"+str(name)+"'")
-    conexion.commit()
-    return {"mensaje": "Usuario actualizado correctamente"}
+    return updateUser(cursor, conexion, name, newName)
