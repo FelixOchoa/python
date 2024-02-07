@@ -2,8 +2,8 @@
 ## Bucle FOR
 frutas = ["manzana", "pera", "mango", "Guineo maduro"]
 
-# for fruta in frutas:
-#     print(fruta)
+ for fruta in frutas:
+     print(fruta)
 
 # for i in range(6):
 #     print(i)
