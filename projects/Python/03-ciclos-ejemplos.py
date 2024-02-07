@@ -29,10 +29,27 @@
 limite = int(input("Por favor. Digite el límite del ejercicio: "))
 acumulador = 0
 
-while ( acumulador < limite):
-    nuevoNumero = int(input("Por favor digite un número: "))
+# for i in range(limite):
+#     nuevoNumero = int(input("Por favor digite un número: "))
 
-    acumulador += nuevoNumero
+#     acumulador += nuevoNumero
+
+#     if(acumulador > limite):
+#         print("El número ingresado supera el límite")
+#         break
+
+# while ( acumulador < limite):
+#     nuevoNumero = int(input("Por favor digite un número: "))
+
+#     acumulador += nuevoNumero
 
 print("El límite es: ", limite)
 print("El acumulador fue: ", acumulador)
+
+# listaNumeros = [1000, 2000, 12323, 312212, 1212]
+# sumaNumeros = 0
+
+# for numero in listaNumeros:
+#     sumaNumeros += numero
+
+# print("La suma de los números es: ", sumaNumeros)

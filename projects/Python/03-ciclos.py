@@ -2,19 +2,20 @@
 ## Bucle FOR
 frutas = ["manzana", "pera", "mango", "Guineo maduro"]
 
- for fruta in frutas:
-     print(fruta)
+# for fruta in frutas:
+#      print(fruta)
 
 # for i in range(6):
-#     print(i)
+#    print(i)
 
-# for i in range(1, 6):
+#for i in range(1, 6):
 #     print(i)
 
 # for indice, fruta in enumerate(frutas):
-#     if ( fruta == "mango"):
-#         print("El mango está rico")
-#         break
+#     #  if ( fruta == "mango"):
+#     #      print("El mango está rico")
+#     #      break
+#     print(indice, fruta)
 
 #     if ( fruta == "pera"):
 #         print("La pera está rica")
@@ -25,12 +26,12 @@ frutas = ["manzana", "pera", "mango", "Guineo maduro"]
 # ## Bucle WHILE
 # contador = 0
 
-# # while (contador <= 5):
-# #     if(contador != 0):
-# #         print("Este es el paso número", contador)
-# #     contador += 1
+# while (contador <= 5):
+#     if(contador != 0):
+#         print("Este es el paso número", contador)
+#     contador += 1
 
-# ## Bucle WHILE con ELSE
+## Bucle WHILE con ELSE
 # contador = 0
 
 # while (contador < 5):
@@ -66,18 +67,25 @@ frutas = ["manzana", "pera", "mango", "Guineo maduro"]
 # print(listaNumeros)
 
 
-# intentos = 0
+intentos = 1
+listaContraseñas = ["felix", "calamar", "alfredo", "gutierrez"]
+contraseñaEncontrada = False
 
-# listaContraseñas = []
+while (intentos <= 3):
+    print("Intento número", intentos)
+    contraseñaDigitada = input("Introduce la contraseña: ")
 
-# while (intentos < 3):
-#     contraseña = input("Introduce la contraseña: ")
+    for contraseña in listaContraseñas:
+        if contraseñaDigitada == contraseña:
+            print("¡Contraseña correcta!")
+            contraseñaEncontrada = True
+            break
+    else:
+        print("Contraseña incorrecta. Inténtalo de nuevo.")
+        intentos += 1
 
-#     if contraseña == "secreto":
-#         print("¡Contraseña correcta!")
-#         break
-#     else:
-#         print("Contraseña incorrecta. Inténtalo de nuevo.")
-#         intentos += 1
-# else:
-#     print("Has agotado tus intentos. Bloqueando el acceso.")
+    if(contraseñaEncontrada == True):
+        break
+    
+else:
+    print("Has agotado tus intentos. Bloqueando el acceso.")
