@@ -17,5 +17,3 @@ conexion = mysql.connector.connect(
 )
 
 cursor = conexion.cursor()
-
-print(conexion)
