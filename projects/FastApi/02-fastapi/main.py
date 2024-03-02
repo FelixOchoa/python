@@ -1,16 +1,48 @@
 from fastapi import FastAPI
 from utils.data import estudiantes
 from services.studentServices import addStudent
+from config.database import cursor
+from fastapi.middleware.cors import CORSMiddleware
 
+origins = [
+    "http://localhost:5173"
+]
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
 
-@app.get("/estudiantes")
-def get_students():
-    return estudiantes
+@app.get("/usuarios")
+def get_users():
+    usuarios = cursor.execute("SELECT * FROM usuario")
+    usuarios = cursor.fetchall()
+
+    usuariosParseadosAJSON = []
+
+    for usuario in usuarios:
+        usuarioJSON = {
+            "id": usuario[0],
+            "username": usuario[1],
+            "password": usuario[2],
+            "foto": usuario[3],
+            "nombre": usuario[4],
+            "correo": usuario[5],
+            "telefono": usuario[6],
+            "id_rol": usuario[7],
+        }
+        usuariosParseadosAJSON.append(usuarioJSON)
+
+    return usuariosParseadosAJSON
 
 @app.get("/estudiantes/{estudiante_id}")
 def get_student(estudiante_id: int):
